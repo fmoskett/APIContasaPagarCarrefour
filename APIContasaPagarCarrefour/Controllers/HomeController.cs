@@ -41,8 +41,8 @@ namespace APIContasaPagarCarrefour.Controllers
             _contaPagarRepository.AdicionarContaPagar(contaPagar);
         }
         [HttpPost("AtualizarContaPagar")]
-        [Description("Atualização de Contas a Pagar")]
-        [SwaggerOperation(OperationId = "Atualização de Contas a Pagar")]
+        [Description("AtualizaÃ§Ã£o de Contas a Pagar")]
+        [SwaggerOperation(OperationId = "AtualizaÃ§Ã£o de Contas a Pagar")]
         public void AtualizarContaPagar(int Id, DateTime dateVencimento, DateTime datePagamento, string fornecedor, decimal valor, bool pago)
 
         {
@@ -63,9 +63,9 @@ namespace APIContasaPagarCarrefour.Controllers
         }
 
         [HttpPost("ObterConsolidadoDiario")]
-        public List<ContaPagar>  ObterConsolidadoDiario(DateTime dataPagamento)
+        public decimal ObterConsolidadoDiario(DateTime dataPagamento)
         {
-          return   _contaPagarRepository.ObterContasPagarDia(dataPagamento).ToList();
+          return   _contaPagarRepository.ObterContasPagarDia(dataPagamento);
         }
     }
 }
