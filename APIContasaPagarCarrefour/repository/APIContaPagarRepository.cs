@@ -19,9 +19,13 @@ namespace APIContasaPagarCarrefour.Repository
             return _context.Set<ContaPagar>().ToList();
         }
 
-        public List<ContaPagar> ObterContasPagarDia( DateTime dataPagaento)
+        public decimal ObterContasPagarDia(DateTime data)
         {
-            return _context.Set<ContaPagar>().Where( e => e.DataPagamento == dataPagaento).ToList();
+            decimal soma = _context.Set<ContaPagar>()
+                .Where(c => c.DataPagamento == data.Date)
+                .Sum(c => c.Valor);
+
+            return soma;
         }
 
         public ContaPagar ObterContaPagarPorId(int id)
