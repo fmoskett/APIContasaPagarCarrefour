@@ -20,6 +20,10 @@ namespace APIContasaPagarCarrefour.Controllers
             _logger = logger;
         }
         public IContaPagarRepository? _contaPagarRepository;
+        public HomeController(IContaPagarRepository contaPagarRepository)
+        {
+            _contaPagarRepository = contaPagarRepository;
+        }
 
         [HttpGet("ObterContasPagar")]
         public List<ContaPagar> ObterContasPagar()
