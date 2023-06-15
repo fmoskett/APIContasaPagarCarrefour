@@ -5,7 +5,7 @@ namespace APICarrefourContasPagar.Interface
     public interface IContaPagarRepository
     {
         List<ContaPagar> ObterContasPagar();
-        decimal ObterContasPagarDia( DateTime dataPagamento);
+        List<ContaPagar> ObterContasPagarDia( DateTime dataPagamento);
         ContaPagar ObterContaPagarPorId(int id);
         void AdicionarContaPagar(ContaPagar contaPagar);
         void AtualizarContaPagar(ContaPagar contaPagar);
