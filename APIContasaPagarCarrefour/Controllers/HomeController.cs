@@ -1,7 +1,5 @@
 using APICarrefourContasAPagar.Business;
 using APICarrefourContasPagar.Dominio;
-using APIContasaPagarCarrefour.interfaces;
-using APIContasaPagarCarrefour.repository;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel;
@@ -65,7 +63,7 @@ namespace APIContasaPagarCarrefour.Controllers
         }
 
         [HttpPost("ObterConsolidadoDiario")]
-        public decimal ObterConsolidadoDiario(DateTime dataPagamento)
+        public List<ContaPagar> ObterConsolidadoDiario(DateTime dataPagamento)
         {
           return _contaPagar.ObterContasPagarDia(dataPagamento).ToList();
         }
