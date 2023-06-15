@@ -1,5 +1,7 @@
+using APICarrefourContasAPagar.Business;
 using APICarrefourContasPagar.Dominio;
-using APICarrefourContasPagar.Interface;
+using APIContasaPagarCarrefour.interfaces;
+using APIContasaPagarCarrefour.repository;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel;
@@ -19,17 +21,13 @@ namespace APIContasaPagarCarrefour.Controllers
         {
             _logger = logger;
         }
-        public IContaPagarRepository? _contaPagarRepository;
-        public HomeController(IContaPagarRepository contaPagarRepository)
-        {
-            _contaPagarRepository = contaPagarRepository;
-        }
+        public buContasAPagar _contaPagar = new buContasAPagar();
 
         [HttpGet("ObterContasPagar")]
         public List<ContaPagar> ObterContasPagar()
         {
 
-        return    _contaPagarRepository.ObterContasPagar();
+            return _contaPagar.ObterContasPagar();
         }
 
         [HttpPost("AdicionarContaPagar")]
@@ -42,11 +40,11 @@ namespace APIContasaPagarCarrefour.Controllers
             contaPagar.Pago = pago;
             contaPagar.Id = Id;
             contaPagar.DataPagamento = datePagamento;
-            _contaPagarRepository.AdicionarContaPagar(contaPagar);
+            _contaPagar.AdicionarContaPagar(contaPagar);
         }
         [HttpPost("AtualizarContaPagar")]
-        [Description("Atualização de Contas a Pagar")]
-        [SwaggerOperation(OperationId = "Atualização de Contas a Pagar")]
+        [Description("Atualiza��o de Contas a Pagar")]
+        [SwaggerOperation(OperationId = "Atualiza��o de Contas a Pagar")]
         public void AtualizarContaPagar(int Id, DateTime dateVencimento, DateTime datePagamento, string fornecedor, decimal valor, bool pago)
 
         {
@@ -58,18 +56,18 @@ namespace APIContasaPagarCarrefour.Controllers
             contaPagar.Id = Id;
             contaPagar.DataPagamento = datePagamento;
 
-            _contaPagarRepository.AtualizarContaPagar(contaPagar);
+            _contaPagar.AtualizarContaPagar(contaPagar);
         }
         [HttpPost("RemoverContaPagar")]
         public void RemoverContaPagar(int id)
         {
-            _contaPagarRepository.RemoverContaPagar(id);
+            _contaPagar.RemoverContaPagar(id);
         }
 
         [HttpPost("ObterConsolidadoDiario")]
         public decimal ObterConsolidadoDiario(DateTime dataPagamento)
         {
-          return   _contaPagarRepository.ObterContasPagarDia(dataPagamento);
+          return _contaPagar.ObterContasPagarDia(dataPagamento).ToList();
         }
     }
 }
