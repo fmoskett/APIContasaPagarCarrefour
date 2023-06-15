@@ -1,31 +1,37 @@
 ﻿using APICarrefourContasPagar.Dominio;
 using APICarrefourContasPagar.Interface;
+using APIContasaPagarCarrefour.Repository;
 
 namespace APICarrefourContasAPagar.Business
 {
     public class buContasAPagar
     {
-        public IContaPagarRepository? _contaPagarRepository;
+        public IContaPagarRepository _contaPagarRepository = new APIContaPagarRepository();
 
         public IContaPagarRepository ContaPagarService(IContaPagarRepository contaPagarRepository)
         {
             return _contaPagarRepository = contaPagarRepository;
         }
 
-        public List<ContaPagar> ObterContasPagar()
+        //ObterContasPagarDia
+        public List<ContaPagar> ObterContasPagarDia( DateTime dataPagamento)
         {
-            return _contaPagarRepository.ObterContasPagar();
+
+            return _contaPagarRepository.ObterContasPagarDia( dataPagamento);
         }
 
-        public ContaPagar ObterContaPagarPorId(int id)
+        public List<ContaPagar> ObterContasPagar()
         {
-            return _contaPagarRepository.ObterContaPagarPorId(id);
+
+                return _contaPagarRepository.ObterContasPagar();
         }
 
         public void AdicionarContaPagar(ContaPagar contaPagar)
         {
-            _contaPagarRepository.AdicionarContaPagar(contaPagar);
+            APIContaPagarRepository addRepos = new();
+            addRepos.AdicionarContaPagar(contaPagar);
         }
+
 
         public void AtualizarContaPagar(ContaPagar contaPagar)
         {

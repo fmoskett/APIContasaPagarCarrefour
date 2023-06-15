@@ -1,22 +1,37 @@
 ﻿using APICarrefourContasPagar.Dominio;
 using APICarrefourContasPagar.Interface;
-using System.Data.Entity;
+using APIContasaPagarCarrefour.dominio;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace APIContasaPagarCarrefour.Repository
 
 {
     public class APIContaPagarRepository : IContaPagarRepository
     {
-        private readonly DbContext _context;
+        private  ContasContext _context;
 
-        public APIContaPagarRepository(DbContext context)
+
+
+
+        public APIContaPagarRepository()
         {
-            _context = context;
+            _context = new ContasContext();
         }
+
 
         public List<ContaPagar> ObterContasPagar()
         {
+
+
+
             return _context.Set<ContaPagar>().ToList();
+
+
+
+
+
+
         }
 
         public decimal ObterContasPagarDia(DateTime data)
@@ -35,6 +50,7 @@ namespace APIContasaPagarCarrefour.Repository
 
         public void AdicionarContaPagar(ContaPagar contaPagar)
         {
+          
             _context.Set<ContaPagar>().Add(contaPagar);
             _context.SaveChanges();
         }
