@@ -11,9 +11,6 @@ namespace APIContasaPagarCarrefour.Repository
     {
         private  ContasContext _context;
 
-
-
-
         public APIContaPagarRepository()
         {
             _context = new ContasContext();
@@ -34,19 +31,33 @@ namespace APIContasaPagarCarrefour.Repository
 
         }
 
-        public List<ContaPagar> ObterContasPagarDia(DateTime data)
+        public List<ResultadoContaPagar> ObterContasPagarDia(DateTime data)
         {
-            var resultados = _context.Set<ContaPagar>()
+            var contasPagar = _context.Set<ContaPagar>()
                 .Where(c => c.DataPagamento == data.Date)
+                .AsEnumerable();
+
+            var resultados = contasPagar
                 .GroupBy(c => c.Fornecedor)
-                .Select(g => new
+                .Select(g => new ResultadoContaPagar
                 {
                     Fornecedor = g.Key,
-                    Soma = g.Sum(c => c.Valor)
+                    DataP = data,
+                    Valores = g.Sum(c => (double)decimal.Parse(c.Valor.ToString()))
+                    
                 })
                 .ToList();
 
-            return resultados.Cast<ContaPagar>().ToList(); ;
+            return resultados;
+            
+
+
+
+
+
+
+         
+
         }
 
         public ContaPagar ObterContaPagarPorId(int id)

@@ -1,5 +1,6 @@
 ﻿using APICarrefourContasPagar.Dominio;
 using APICarrefourContasPagar.Interface;
+using APIContasaPagarCarrefour.dominio;
 using APIContasaPagarCarrefour.Repository;
 using log4net;
 
@@ -27,7 +28,7 @@ namespace APICarrefourContasAPagar.Business
         }
 
         //ObterContasPagarDia
-        public List<ContaPagar> ObterContasPagarDia(DateTime dataPagamento)
+        public List<ResultadoContaPagar> ObterContasPagarDia(DateTime dataPagamento)
         {
             try
             {

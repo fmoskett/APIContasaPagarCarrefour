@@ -1,5 +1,6 @@
 using APICarrefourContasAPagar.Business;
 using APICarrefourContasPagar.Dominio;
+using APIContasaPagarCarrefour.dominio;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel;
@@ -29,14 +30,14 @@ namespace APIContasaPagarCarrefour.Controllers
         }
 
         [HttpPost("AdicionarContaPagar")]
-        public void AdicionarContaPagar(int Id, DateTime dateVencimento, DateTime datePagamento,  string fornecedor, decimal valor, bool pago)
+        public void AdicionarContaPagar(DateTime dateVencimento, DateTime datePagamento,  string fornecedor, decimal valor, bool pago)
         {
             ContaPagar contaPagar = new ContaPagar();
             contaPagar.DataVencimento = dateVencimento;
             contaPagar.Fornecedor = fornecedor;
             contaPagar.Valor = valor;
             contaPagar.Pago = pago;
-            contaPagar.Id = Id;
+           
             contaPagar.DataPagamento = datePagamento;
             _contaPagar.AdicionarContaPagar(contaPagar);
         }
@@ -56,14 +57,9 @@ namespace APIContasaPagarCarrefour.Controllers
 
             _contaPagar.AtualizarContaPagar(contaPagar);
         }
-        [HttpPost("RemoverContaPagar")]
-        public void RemoverContaPagar(int id)
-        {
-            _contaPagar.RemoverContaPagar(id);
-        }
 
         [HttpPost("ObterConsolidadoDiario")]
-        public List<ContaPagar> ObterConsolidadoDiario(DateTime dataPagamento)
+        public List<ResultadoContaPagar> ObterConsolidadoDiario(DateTime dataPagamento)
         {
           return _contaPagar.ObterContasPagarDia(dataPagamento).ToList();
         }

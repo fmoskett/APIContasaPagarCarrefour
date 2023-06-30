@@ -16,7 +16,6 @@ namespace APIContasaPagarCarrefour
             services.AddAuthorization();
             services.AddControllers();
             services.AddScoped<IContaPagarRepository, APIContaPagarRepository>();
-            //services.AddDbContext<ContasContext>(); 
             // Adicionar o serviço do Swagger
             services.AddSwaggerGen(c =>
             {
@@ -62,16 +61,6 @@ namespace APIContasaPagarCarrefour
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
-        //public void ConfigureServices(IServiceCollection services)
-        //{
 
-        //    var connectionString = Configuration.GetConnectionString("DefaultConnection");
-
-        //    services.AddSingleton<IConfiguration>(Configuration);
-
-        //    services.AddDbContext<ContasContext>(options =>
-        //        options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-        //    services.AddScoped<IContaPagarRepository, APIContaPagarRepository>();
-        //}
     }
 }
